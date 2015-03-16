@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,7 +14,14 @@ public class Main {
 			System.out.println("3. Checkout");
 			System.out.println("4. Exit");
 
-			switch (in.nextInt()) {
+			int i = 0;
+			try {
+				i = Integer.parseInt(in.next());
+			} catch (NumberFormatException e) {
+				System.out.println("Error: Insert 1, 2, 3 or 4!");
+			}
+
+			switch (i) {
 			case 1: // LIST PRODUCTS
 				warehouse.print();
 				break;
@@ -24,11 +30,11 @@ public class Main {
 					System.out.println("Enter product key:");
 					String key = in.next();
 					System.out.println("Enter quantity:");
-					int qty = in.nextInt() + basket.getQty(key);
+					int qty = Integer.parseInt(in.next()) + basket.getQty(key);
 
 					Product p = warehouse.getProduct(key, qty);
 					basket.add(p, qty);
-				} catch (InputMismatchException e) {
+				} catch (NumberFormatException e) {
 					System.out.println("Error: Insert number for quantity!");
 				} catch (ProductKeyException e) {
 					System.out.println("Error: Wrong product key!");
