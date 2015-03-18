@@ -2,11 +2,7 @@ import java.util.ArrayList;
 
 public class Basket {
 
-	private ArrayList<Product> list;
-
-	public Basket() {
-		list = new ArrayList<Product>();
-	}
+	private ArrayList<Product> list = new ArrayList<Product>();
 
 	public void checkout() {
 		int total = 0;

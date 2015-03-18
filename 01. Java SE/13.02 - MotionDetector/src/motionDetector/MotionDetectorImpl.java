@@ -7,8 +7,8 @@ import alarm.Alarm;
 
 public class MotionDetectorImpl implements MotionDetector {
 
-	ImageCaptureDevice imageCaptureDevice;
-	ArrayList<Alarm> list;
+	private ImageCaptureDevice imageCaptureDevice;
+	private ArrayList<Alarm> list;
 
 	public MotionDetectorImpl(ImageCaptureDevice i, ArrayList<Alarm> l) {
 		this.imageCaptureDevice = i;

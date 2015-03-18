@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Console {
 
-	Scanner in = new Scanner(System.in);
+	private Scanner in = new Scanner(System.in);
 
 	public byte[] getImg() {
 		System.out.println("Enter image:");

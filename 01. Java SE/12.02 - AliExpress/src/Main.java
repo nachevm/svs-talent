@@ -39,7 +39,8 @@ public class Main {
 				} catch (ProductKeyException e) {
 					System.out.println("Error: Wrong product key!");
 				} catch (QtyException e) {
-					System.out.println("Error: Not enough quantity in warehouse!");
+					System.out
+							.println("Error: Not enough quantity in warehouse!");
 				}
 				break;
 			case 3: // CHECKOUT

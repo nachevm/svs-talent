@@ -5,7 +5,7 @@ import imageCapture.ImageCaptureDevice;
 
 public class ConsoleAdapter implements ImageCaptureDevice {
 
-	Console c;
+	private Console c;
 
 	public ConsoleAdapter(Console cc) {
 		c = cc;
