@@ -13,6 +13,7 @@ public class Console {
 		try {
 			img = in.nextLine().getBytes();
 		} catch (NoSuchElementException e) {
+			return null;
 		}
 		return img;
 	}

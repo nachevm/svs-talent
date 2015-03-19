@@ -6,7 +6,7 @@ public class Stopwatch {
 	private boolean stop = false;
 	private boolean start = false;
 	private boolean paused = false;
-	private Runnable stopwatchRunnable = new Runnable() {
+	private Thread stopwatch = new Thread() {
 
 		@Override
 		public void run() {
@@ -34,11 +34,10 @@ public class Stopwatch {
 		}
 
 	};
-	private Thread stopwatchThread = new Thread(stopwatchRunnable);
 
 	public void start() {
 		if (!start) {
-			stopwatchThread.start();
+			stopwatch.start();
 		}
 	}
 
@@ -52,8 +51,8 @@ public class Stopwatch {
 
 	public void resume() {
 		paused = false;
-		synchronized (stopwatchRunnable) {
-			stopwatchRunnable.notifyAll();
+		synchronized (stopwatch) {
+			stopwatch.notifyAll();
 		}
 	}
 
