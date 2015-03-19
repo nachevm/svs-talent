@@ -37,6 +37,7 @@ public class Stopwatch {
 
 	public void start() {
 		if (!start) {
+			start = true;
 			stopwatch.start();
 		}
 	}
