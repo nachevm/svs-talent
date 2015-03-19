@@ -7,8 +7,9 @@ public class Main {
 		Warehouse warehouse = new Warehouse();
 		Basket basket = new Basket();
 		Scanner in = new Scanner(System.in);
+		boolean end = false;
 
-		while (true) {
+		while (!end) {
 			System.out.println("1. List Products");
 			System.out.println("2. Add product to basket");
 			System.out.println("3. Checkout");
@@ -18,7 +19,7 @@ public class Main {
 			try {
 				i = Integer.parseInt(in.next());
 			} catch (NumberFormatException e) {
-				System.out.println("Error: Insert 1, 2, 3 or 4!");
+				System.out.println("Insert 1, 2, 3 or 4!");
 			}
 
 			switch (i) {
@@ -35,23 +36,22 @@ public class Main {
 					Product p = warehouse.getProduct(key, qty);
 					basket.add(p, qty);
 				} catch (NumberFormatException e) {
-					System.out.println("Error: Insert number for quantity!");
+					System.out.println("Insert number for quantity!");
 				} catch (ProductKeyException e) {
-					System.out.println("Error: Wrong product key!");
+					System.out.println("Wrong product key!");
 				} catch (QtyException e) {
-					System.out
-							.println("Error: Not enough quantity in warehouse!");
+					System.out.println("Not enough quantity in warehouse!");
 				}
 				break;
 			case 3: // CHECKOUT
 				basket.checkout();
 				break;
 			case 4: // EXIT
-				in.close();
-				System.exit(0);
+				end = true;
 				break;
 			}
 		}
+		in.close();
 	}
 
 }
