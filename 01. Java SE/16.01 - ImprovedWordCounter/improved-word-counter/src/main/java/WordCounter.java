@@ -23,8 +23,7 @@ public class WordCounter {
 				} else {
 					String[] words = line.split(" ");
 					for (int i = 0; i < words.length; i++) {
-						String s = words[i].toLowerCase();
-						StringUtils.equalsIgnoreCase(words[i], s); // not needed
+						String s = StringUtils.lowerCase(words[i]);
 						if (map.containsKey(s)) {
 							map.put(s, map.get(s) + 1);
 						} else {
