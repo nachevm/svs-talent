@@ -55,8 +55,7 @@ public class HibernateBookDAO implements BookDAO {
 
 	public void unregisterBook(int id) throws NoSuchIdException {
 		Session session = HibernateConnection.createSession();
-		Query query = session
-				.createQuery("DELETE FROM Book WHERE id=:id");
+		Query query = session.createQuery("DELETE FROM Book WHERE id=:id");
 		query.setParameter("id", id);
 		int result = query.executeUpdate();
 		session.close();

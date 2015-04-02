@@ -12,6 +12,6 @@ public interface BookDAO {
 			throws NoSuchIdException;
 
 	public void unregisterBook(int id) throws NoSuchIdException;
-	
+
 	public void checkISBN(String isbn) throws IsbnExistsException;
 }

@@ -21,7 +21,7 @@ public class JDBCBookDAO implements BookDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				books.add(new Book(resultSet.getInt("id"), resultSet
-					.getString("isbn"), resultSet.getString("title")));
+						.getString("isbn"), resultSet.getString("title")));
 			}
 
 			preparedStatement.close();
@@ -99,7 +99,7 @@ public class JDBCBookDAO implements BookDAO {
 					.prepareStatement("SELECT * FROM book WHERE isbn=?");
 			preparedStatement.setString(1, isbn);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()){
+			if (resultSet.next()) {
 				throw new IsbnExistsException();
 			}
 			preparedStatement.close();

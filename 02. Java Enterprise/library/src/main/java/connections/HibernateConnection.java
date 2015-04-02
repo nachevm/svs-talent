@@ -9,26 +9,26 @@ import org.hibernate.service.ServiceRegistry;
 import book.Book;
 
 public class HibernateConnection {
-	
+
 	private static SessionFactory sessionFactory;
-	
-	public static void createSessionFactory(){
+
+	public static void createSessionFactory() {
 		Configuration configuration = new Configuration();
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
 		sessionFactory = configuration.addAnnotatedClass(Book.class)
 				.buildSessionFactory(serviceRegistry);
 	}
-	
-	public static SessionFactory getSessionFactory(){
+
+	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-	
-	public static void closeSessionFactory(){
+
+	public static void closeSessionFactory() {
 		sessionFactory.close();
 	}
-	
-	public static Session createSession(){
+
+	public static Session createSession() {
 		return sessionFactory.openSession();
 	}
 }
