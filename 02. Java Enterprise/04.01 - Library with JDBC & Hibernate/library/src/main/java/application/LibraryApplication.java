@@ -8,7 +8,7 @@ import menu.Menu;
 
 public class LibraryApplication {
 
-	private static int dao = 2; // 1 = JDBC, 2 = Hibernate
+	private static int dao = 1; // 1 = JDBC, 2 = Hibernate
 
 	public static void main(String[] args) {
 

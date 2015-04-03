@@ -32,6 +32,7 @@ public class HibernateBookDAO implements BookDAO {
 			if (tx != null) {
 				tx.rollback();
 			}
+			session.close();
 			throw new DBException();
 		} finally {
 			session.close();
@@ -70,6 +71,7 @@ public class HibernateBookDAO implements BookDAO {
 		query.setParameter("isbn", isbn);
 		List<Book> results = query.list();
 		if (!results.isEmpty()) {
+			session.close();
 			throw new IsbnExistsException();
 		}
 		session.close();

@@ -100,6 +100,8 @@ public class JDBCBookDAO implements BookDAO {
 			preparedStatement.setString(1, isbn);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
+				preparedStatement.close();
+				connection.close();
 				throw new IsbnExistsException();
 			}
 			preparedStatement.close();
