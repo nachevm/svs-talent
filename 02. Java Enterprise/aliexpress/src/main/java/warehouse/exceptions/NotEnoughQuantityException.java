@@ -1,4 +1,4 @@
-package warehouse;
+package warehouse.exceptions;
 
 public class NotEnoughQuantityException extends Exception {
 

@@ -4,25 +4,27 @@ import java.util.List;
 import java.util.Scanner;
 
 import basket.Basket;
+import basket.BasketService;
 import logging.ConsoleLogger;
 import logging.Logger;
-import warehouse.GenericDBException;
-import warehouse.NoSuchKeyException;
-import warehouse.NotEnoughQuantityException;
 import warehouse.Product;
-import warehouse.Warehouse;
 import warehouse.WarehouseService;
+import warehouse.dao.Warehouse;
+import warehouse.exceptions.GenericDBException;
+import warehouse.exceptions.NoSuchKeyException;
+import warehouse.exceptions.NotEnoughQuantityException;
 
 public class ConsoleMenu implements Menu {
 
 	private Scanner in = new Scanner(System.in);
 	private WarehouseService warehouseService;
-	private Basket basket = new Basket();
+	private BasketService basketService;
 	private boolean end = false;
 	private Logger logger = new ConsoleLogger();
 
-	public ConsoleMenu(Warehouse warehouse) {
+	public ConsoleMenu(Warehouse warehouse, Basket basket) {
 		warehouseService = new WarehouseService(warehouse);
+		basketService = new BasketService(basket);
 	}
 
 	public void listOptions() {
@@ -49,9 +51,10 @@ public class ConsoleMenu implements Menu {
 			System.out.println("Enter product key:");
 			String key = in.next();
 			System.out.println("Enter quantity:");
-			int qty = Integer.parseInt(in.next()) + basket.getQuantity(key);
+			int qty = Integer.parseInt(in.next())
+					+ basketService.getQuantity(key);
 			Product p = warehouseService.getProduct(key, qty);
-			basket.add(p, qty);
+			basketService.add(p, qty);
 		} catch (NoSuchKeyException e) {
 			logger.log("No such product key!");
 		} catch (NotEnoughQuantityException e) {
@@ -62,12 +65,12 @@ public class ConsoleMenu implements Menu {
 	}
 
 	public void listBasket() {
-		List<Product> products = basket.getProducts();
+		List<Product> products = basketService.getProducts();
 		for (Product p : products) {
 			System.out.println(p.getKey() + "|" + p.getName() + "|"
 					+ p.getPrice() + "|" + p.getQuantity());
 		}
-		System.out.println("Total: " + basket.getTotal());
+		System.out.println("Total: " + basketService.getTotal());
 	}
 
 	public void exit() {

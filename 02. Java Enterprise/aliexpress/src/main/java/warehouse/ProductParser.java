@@ -22,6 +22,7 @@ public class ProductParser {
 					.parseInt(w[3])));
 		}
 		buff.close();
+		file.close();
 
 		return list;
 	}

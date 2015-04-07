@@ -1,9 +1,9 @@
 package application;
 
-import warehouse.HibernateWarehouse;
-import warehouse.InMemoryWarehouse;
-import warehouse.JDBCWarehouse;
-import warehouse.Warehouse;
+import basket.Basket;
+import basket.ShoppingBasket;
+import warehouse.dao.Warehouse;
+import warehouse.dao.WarehouseFactory;
 import menu.ConsoleMenu;
 import menu.Menu;
 
@@ -12,18 +12,9 @@ public class AliExpressApplication {
 	private static int dao = 3; // 1 - InMemory, 2 - JDBC, 3 - Hibernate
 
 	public static void main(String[] args) {
-		Warehouse warehouse;
-		switch (dao) {
-		case 2:
-			warehouse = new JDBCWarehouse();
-			break;
-		case 3:
-			warehouse = new HibernateWarehouse();
-			break;
-		default:
-			warehouse = new InMemoryWarehouse();
-		}
-		Menu menu = new ConsoleMenu(warehouse);
+		Warehouse warehouse = WarehouseFactory.createWarehouse(dao);
+		Basket basket = new ShoppingBasket();
+		Menu menu = new ConsoleMenu(warehouse, basket);
 		menu.run();
 	}
 }

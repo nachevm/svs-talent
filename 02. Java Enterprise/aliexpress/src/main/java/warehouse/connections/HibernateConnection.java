@@ -1,4 +1,4 @@
-package connections;
+package warehouse.connections;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,14 +10,16 @@ import warehouse.Product;
 
 public class HibernateConnection {
 
-	private static SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory = null;
 
 	public static void createSessionFactory() {
-		Configuration configuration = new Configuration();
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties()).build();
-		sessionFactory = configuration.addAnnotatedClass(Product.class)
-				.buildSessionFactory(serviceRegistry);
+		if (sessionFactory == null) {
+			Configuration configuration = new Configuration();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+					.applySettings(configuration.getProperties()).build();
+			sessionFactory = configuration.addAnnotatedClass(Product.class)
+					.buildSessionFactory(serviceRegistry);
+		}
 	}
 
 	public static void closeSessionFactory() {

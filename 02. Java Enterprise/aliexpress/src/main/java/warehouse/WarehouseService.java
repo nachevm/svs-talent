@@ -2,7 +2,10 @@ package warehouse;
 
 import java.util.List;
 
-import connections.HibernateConnection;
+import warehouse.dao.HibernateWarehouse;
+import warehouse.dao.Warehouse;
+import warehouse.exceptions.NoSuchKeyException;
+import warehouse.exceptions.NotEnoughQuantityException;
 
 public class WarehouseService {
 
@@ -19,6 +22,9 @@ public class WarehouseService {
 	public Product getProduct(String key, int qty)
 			throws NotEnoughQuantityException, NoSuchKeyException {
 		Product product = warehouse.getProduct(key);
+		if (product == null) {
+			throw new NoSuchKeyException();
+		}
 		if (product.getQuantity() < qty) {
 			throw new NotEnoughQuantityException();
 		}
@@ -27,7 +33,7 @@ public class WarehouseService {
 
 	public void exit() {
 		if (warehouse instanceof HibernateWarehouse) {
-			HibernateConnection.closeSessionFactory();
+			((HibernateWarehouse) warehouse).exit();
 		}
 	}
 
