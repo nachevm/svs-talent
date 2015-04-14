@@ -10,8 +10,7 @@ td {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<a th:href="@{/accountRegistration}">Account Registration</a><br/>
-	<a th:href="@{/accountUpdate}">Modify Account</a><br/><br/>
+	<a th:href="@{/accountRegistration}">Account Registration</a><br/><br/>
 	<table border="1">
 		<tr>
 			<td>Product</td>
@@ -25,9 +24,9 @@ td {
 		</tr>
 	</table>
 	<br />
-	<form action="#" th:action="@{/checkout}" th:object="${account}" method="post">
+	<form action="#" th:action="@{/checkout}" method="post">
 	E-Mail:<input type="text" name="email" />
-	| Password:<input type="text" name="password" /><br /><br />
+	--- Password:<input type="password" name="password" /><br /><br />
 	<input type="submit" value="Checkout" />
 	</form>
 </body>

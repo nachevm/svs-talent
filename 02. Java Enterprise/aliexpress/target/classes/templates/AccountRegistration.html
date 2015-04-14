@@ -5,12 +5,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<form action="#" th:action="@{/accountRegistration}" th:object="${account}" method="post">
-		<input type="hidden" th:field="*{id}"/>
-		Name:<input type="text" th:field="*{name}" /><br />
-		E-Mail:<input type="text" th:field="*{email}" /><br />
-		Password:<input type="text" th:field="*{password}" /><br />
+	<form action="#" th:action="@{/accountRegistration}" method="post">
+		Name:<input type="text" name="name" /><br /> 
+		E-Mail:<input type="text" name="email" /><br />
+		Password:<input type="password" name="password" /><br />
 		<input type="submit" value="Register account" />
 	</form>
+	<table>
+		<tr>
+			<td th:text="${message}">Message</td>
+		</tr>
+	</table>
 </body>
 </html>

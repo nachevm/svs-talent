@@ -45,10 +45,13 @@ public class ShopWebController {
 	@RequestMapping(value = "/{key}", method = RequestMethod.GET)
 	public String addToBasket(@PathVariable("key") String key,
 			@ModelAttribute("basket") Basket basket, Model model)
-			throws NotEnoughQuantityException, NoSuchKeyException {
-		int quantity = 1 + basket.getQuantity(key);
-		Product product = warehouseService.getProduct(key, quantity);
-		basket.add(product, quantity);
+			throws NoSuchKeyException {
+		try {
+			int quantity = 1 + basket.getQuantity(key);
+			Product product = warehouseService.getProduct(key, quantity);
+			basket.add(product, quantity);
+		} catch (NotEnoughQuantityException e) {
+		}
 		return "redirect:/shop";
 	}
 
