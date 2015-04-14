@@ -19,16 +19,6 @@ public class CreditCard extends BaseEntity {
 	}
 
 	public CreditCard(long cardNumber, String nameOnCard, byte expirationMonth,
-			short expirationYear, short cvc) {
-		super();
-		this.cardNumber = cardNumber;
-		this.nameOnCard = nameOnCard;
-		this.expirationMonth = expirationMonth;
-		this.expirationYear = expirationYear;
-		this.cvc = cvc;
-	}
-
-	public CreditCard(long cardNumber, String nameOnCard, byte expirationMonth,
 			short expirationYear, short cvc, Account account) {
 		super();
 		this.cardNumber = cardNumber;

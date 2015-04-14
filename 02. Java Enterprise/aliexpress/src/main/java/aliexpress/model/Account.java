@@ -20,13 +20,11 @@ public class Account extends BaseEntity {
 		super();
 	}
 
-	public Account(String name, String email, String password,
-			Set<CreditCard> creditcards) {
+	public Account(String name, String email, String password) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.creditcards = creditcards;
 	}
 
 	public String getName() {

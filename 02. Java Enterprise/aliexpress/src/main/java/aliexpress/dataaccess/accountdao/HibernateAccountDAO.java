@@ -55,24 +55,12 @@ public class HibernateAccountDAO implements AccountDAO {
 	}
 
 	@Override
-	public void insert(final Account account) {
+	public void insertOrUpdate(final Account account) {
 		hibernateTemplate.makeTransaction(new HibernateCommitSetter() {
 
 			@Override
 			public void makeTransaction(Session session) {
-				session.save(account);
-			}
-
-		});
-	}
-
-	@Override
-	public void update(final Account account) {
-		hibernateTemplate.makeTransaction(new HibernateCommitSetter() {
-
-			@Override
-			public void makeTransaction(Session session) {
-				session.update(account);
+				session.saveOrUpdate(account);
 			}
 
 		});

@@ -71,10 +71,12 @@ public class HibernateWarehouse implements Warehouse {
 		});
 	}
 
+	@Override
 	public void insert(final Product product) {
 
 		hibernateTemplate.makeTransaction(new HibernateCommitSetter() {
 
+			@Override
 			public void makeTransaction(Session session) {
 				session.save(product);
 			}
@@ -82,9 +84,11 @@ public class HibernateWarehouse implements Warehouse {
 		});
 	}
 
+	@Override
 	public void delete(final Product product) {
 		hibernateTemplate.makeTransaction(new HibernateCommitSetter() {
 
+			@Override
 			public void makeTransaction(Session session) {
 				session.delete(product);
 			}

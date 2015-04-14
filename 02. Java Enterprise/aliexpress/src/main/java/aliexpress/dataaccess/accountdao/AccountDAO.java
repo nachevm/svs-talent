@@ -10,7 +10,5 @@ public interface AccountDAO {
 
 	Account get(String email, String password);
 
-	void insert(Account account);
-
-	void update(Account account);
+	void insertOrUpdate(Account account);
 }

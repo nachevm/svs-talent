@@ -11,5 +11,5 @@ public interface CreditCardDAO {
 
 	CreditCard get(long cardnumber);
 
-	void insert(CreditCard creditcard);
+	void insertOrUpdate(CreditCard creditcard);
 }

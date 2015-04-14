@@ -1,7 +1,6 @@
 package aliexpress.services;
 
 import java.util.List;
-
 import aliexpress.model.Account;
 import aliexpress.services.exceptions.EmailExistsException;
 

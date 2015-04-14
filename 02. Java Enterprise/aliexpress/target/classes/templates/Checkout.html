@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+td {
+	padding: 5px;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<table border="1">
+		<tr th:each="product : ${products}">
+			<td th:text="${product.name}">Name</td>
+			<td th:text="${product.price}">Price</td>
+			<td th:text="${product.quantity}">Price</td>
+		</tr>
+	</table>
+	<br />
+</body>
+</html>

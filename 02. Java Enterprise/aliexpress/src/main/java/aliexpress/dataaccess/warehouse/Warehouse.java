@@ -11,7 +11,7 @@ public interface Warehouse {
 
 	void update(Product product);
 
-	public void insert(Product product);
+	void insert(Product product);
 
-	public void delete(Product product);
+	void delete(Product product);
 }

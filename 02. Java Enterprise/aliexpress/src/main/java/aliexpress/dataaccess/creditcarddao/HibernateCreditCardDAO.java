@@ -55,12 +55,12 @@ public class HibernateCreditCardDAO implements CreditCardDAO {
 	}
 
 	@Override
-	public void insert(final CreditCard creditcard) {
+	public void insertOrUpdate(final CreditCard creditcard) {
 		hibernateTemplate.makeTransaction(new HibernateCommitSetter() {
 
 			@Override
 			public void makeTransaction(Session session) {
-				session.save(creditcard);
+				session.saveOrUpdate(creditcard);
 			}
 
 		});

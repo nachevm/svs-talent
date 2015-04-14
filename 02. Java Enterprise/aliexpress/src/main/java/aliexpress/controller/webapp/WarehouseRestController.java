@@ -34,7 +34,7 @@ public class WarehouseRestController {
 		warehouseService.delete(key);
 		return "Success";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public Product addProduct(@RequestBody Product product) {
 		warehouseService.insert(product);

@@ -1,14 +1,10 @@
 package aliexpress.controller.actions;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import aliexpress.controller.menu.CreditCardMenu;
 import aliexpress.controller.ui.UI;
 import aliexpress.model.Account;
-import aliexpress.model.CreditCard;
 import aliexpress.services.AccountService;
 import aliexpress.services.exceptions.EmailExistsException;
 import aliexpress.services.exceptions.InvalidEmailException;
@@ -19,12 +15,15 @@ public class AccountUpdateAction implements Action {
 
 	private UI ui;
 	private AccountService accountService;
+	private CreditCardMenu creditCardMenu;
 
 	@Autowired
-	public AccountUpdateAction(UI ui, AccountService accountService) {
+	public AccountUpdateAction(UI ui, AccountService accountService,
+			CreditCardMenu creditCardMenu) {
 		super();
 		this.ui = ui;
 		this.accountService = accountService;
+		this.creditCardMenu = creditCardMenu;
 	}
 
 	@Override
@@ -39,34 +38,14 @@ public class AccountUpdateAction implements Action {
 			String oldPassword = ui.requestInput("password");
 			Account account = accountService.getAccount(oldEmail, oldPassword);
 
-			String name = ui.requestInput("new name");
-			String email = ui.requestInput("new e-mail");
-			String password = ui.requestInput("new password");
+			account.setName(ui.requestInput("new name"));
+			account.setEmail(ui.requestInput("new e-mail"));
+			account.setPassword(ui.requestInput("new password"));
 
-			Set<CreditCard> creditcards = new HashSet<CreditCard>();
-			int n = Integer.parseInt(ui
-					.requestInput("number of new credit cards"));
-			for (int i = 0; i < n; i++) {
-				long cardNumber = Long
-						.parseLong(ui.requestInput("card number"));
-				String nameOnCard = ui.requestInput("name on card");
-				byte expirationMonth = Byte.parseByte(ui
-						.requestInput("expiration month"));
-				short expirationYear = Short.parseShort(ui
-						.requestInput("expiration year"));
-				short cvc = Short.parseShort(ui.requestInput("CVC2/CVV2"));
-				CreditCard creditCard = new CreditCard(cardNumber, nameOnCard,
-						expirationMonth, expirationYear, cvc);
-				creditcards.add(creditCard);
-			}
+			accountService.insertOrUpdate(account);
 
-			account.setName(name);
-			account.setEmail(email);
-			account.setPassword(password);
-			account.setCreditcards(creditcards);
-
-			accountService.update(account);
-
+			creditCardMenu.setAccount(account);
+			creditCardMenu.run();
 		} catch (NoSuchAccountException e) {
 			ui.log("No such account!");
 		} catch (InvalidEmailException e) {
